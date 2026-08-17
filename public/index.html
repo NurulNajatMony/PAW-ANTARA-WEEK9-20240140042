@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Todo App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-inter min-h-screen custom-bg">
+  <!-- Navbar (for Dashboard only) -->
+  <nav class="bg-white/80 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center fixed w-full z-10" id="navbar" style="display: none;">
+    <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">TodoApp.</h1>
+    <button id="logoutBtn" class="text-sm font-medium text-gray-600 hover:text-red-500 transition-colors">Logout</button>
+  </nav>
+
+  <main class="w-full min-h-screen flex justify-center pt-32">
+    
+    <!-- Auth Section (Login/Register) -->
+    <div id="authSection" class="w-full max-w-sm mx-auto h-fit glass-card p-8 rounded-[2rem] shadow-2xl relative overflow-hidden mt-10">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-white tracking-wide" id="authTitle">Login</h2>
+      </div>
+      
+      <form id="authForm" class="space-y-5 relative z-10">
+        <div class="relative">
+          <input type="text" id="username" placeholder="Username" required class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-all">
+          <i data-feather="user" class="absolute right-4 top-3 text-white/70 w-5 h-5"></i>
+        </div>
+        <div class="relative">
+          <input type="password" id="password" placeholder="Password" required class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-all">
+          <i data-feather="lock" class="absolute right-4 top-3 text-white/70 w-5 h-5"></i>
+        </div>
+
+        <div class="flex justify-between items-center text-white/80 text-xs px-2" id="loginOptions">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" class="rounded border-white/30 bg-white/10 text-white focus:ring-0">
+            Remember me
+          </label>
+          <a href="#" onclick="alert('Fitur Lupa Password belum diimplementasikan di backend Todo API ini.')" class="hover:text-white transition-colors">Forgot password?</a>
+        </div>
+        
+        <button type="submit" id="authSubmitBtn" class="w-full bg-white text-gray-900 font-bold py-3 rounded-full hover:bg-gray-100 transition-all shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-2">
+          Login
+        </button>
+      </form>
+      
+      <div class="mt-6 text-center relative z-10">
+        <button id="toggleAuthBtn" class="text-xs text-white/80 hover:text-white transition-colors">
+          Don't have an account? <span class="font-bold">Register</span>
+        </button>
+      </div>
+      <p id="authError" class="text-red-300 text-sm text-center mt-4 hidden relative z-10"></p>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="hidden w-full max-w-4xl mx-auto p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Sidebar: Categories -->
+        <div class="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-white/20 h-fit">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-gray-800">Categories</h3>
+          </div>
+          
+          <form id="categoryForm" class="flex gap-2 mb-4">
+            <input type="text" id="catName" placeholder="New category..." required class="w-full text-sm px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent">
+            <button type="submit" class="bg-purple-100 text-purple-600 px-3 py-2 rounded-lg hover:bg-purple-200 transition-colors">+</button>
+          </form>
+          
+          <ul id="categoryList" class="space-y-2">
+            <!-- Categories rendered here -->
+          </ul>
+        </div>
+
+        <!-- Main Content: Todos -->
+        <div class="md:col-span-2 bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-white/20">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Tasks</h2>
+          
+          <form id="todoForm" class="flex flex-col sm:flex-row gap-3 mb-8">
+            <input type="text" id="todoTitle" placeholder="What needs to be done?" required class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-gray-800">
+            
+            <select id="todoCategory" class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-gray-600 min-w-[140px]">
+              <option value="">No Category</option>
+              <!-- Options rendered dynamically -->
+            </select>
+            
+            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-md">
+              Add Task
+            </button>
+          </form>
+          
+          <div class="space-y-3" id="todoList">
+            <!-- Todos rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>
